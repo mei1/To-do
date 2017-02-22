@@ -3,20 +3,20 @@ package org.qimei.training.pojo;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "TaskGroup")
+@DatabaseTable(tableName = "TaskGroups")
 public class TaskGroup {
 
-	@DatabaseField(foreign = true, foreignColumnName = "taskId", canBeNull = false, useGetSet = true)
-	private NewTask newTask;
+	@DatabaseField(generatedId = true, canBeNull = false, useGetSet = true)
+	private int taskGroupId;
 	@DatabaseField(canBeNull = false, useGetSet = true)
 	private String groupName;
 
-	public NewTask getNewTask() {
-		return newTask;
+	public int getTaskGroupId() {
+		return taskGroupId;
 	}
 
-	public void setNewTask(NewTask newTask) {
-		this.newTask = newTask;
+	public void setTaskGroupId(int taskGroupId) {
+		this.taskGroupId = taskGroupId;
 	}
 
 	public String getGroupName() {

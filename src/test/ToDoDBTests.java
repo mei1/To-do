@@ -1,6 +1,7 @@
 package test;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -8,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.qimei.training.db.ToDoDBHelper;
 import org.qimei.training.db.ToDoDBManager;
-import org.qimei.training.pojo.NewTask;
+import org.qimei.training.pojo.Task;
 import org.qimei.training.pojo.TaskGroup;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,10 +37,14 @@ public class ToDoDBTests {
 	@Test
 	public void testInsertNewTask() throws SQLException {
 
-		NewTask newTask = new NewTask();
-		newTask.setTaskId(1);
+		TaskGroup newTaskGroup = new TaskGroup();
+		newTaskGroup.setTaskGroupId(1);
+		
+		Task newTask = new Task();
+		newTask.setTaskGroup(newTaskGroup);
 		newTask.setTaskTitle("Meetup");
 		newTask.setTaskContent("Attend meetup @ Chinatown");
+		newTask.setTaskDate(new Date());
 		
 		int rowCount = dbHelper.insertIntoNewTask(newTask);
 
@@ -50,9 +55,8 @@ public class ToDoDBTests {
 	public void testInsertTaskGroup() throws SQLException {
 
 		TaskGroup taskGroup = new TaskGroup();
-		NewTask newTask = new NewTask();
+		taskGroup.setTaskGroupId(1);
 		taskGroup.setGroupName("Personal");
-		taskGroup.setNewTask(newTask);
 		
 		int rowCount = dbHelper.insertIntoTaskGroup(taskGroup);
 

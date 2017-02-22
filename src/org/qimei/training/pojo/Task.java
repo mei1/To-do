@@ -1,24 +1,28 @@
 package org.qimei.training.pojo;
 
+import java.util.Date;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "NewTask")
-public class NewTask {
+@DatabaseTable(tableName = "Tasks")
+public class Task {
 
-	@DatabaseField(generatedId = true, canBeNull = false, useGetSet = true)
-	private int taskId;
+	@DatabaseField(foreign = true, foreignColumnName = "taskGroupId", canBeNull = false, useGetSet = true)
+	private TaskGroup taskGroup;
 	@DatabaseField(canBeNull = false, useGetSet = true)
 	private String taskTitle;
 	@DatabaseField(canBeNull = false, useGetSet = true)
 	private String taskContent;
+	@DatabaseField(canBeNull = false, useGetSet = true)
+	private Date taskDate;
 
-	public int getTaskId() {
-		return taskId;
+	public TaskGroup getTaskGroup() {
+		return taskGroup;
 	}
 
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
+	public void setTaskGroup(TaskGroup taskGroup) {
+		this.taskGroup = taskGroup;
 	}
 
 	public String getTaskTitle() {
@@ -35,6 +39,14 @@ public class NewTask {
 
 	public void setTaskContent(String taskContent) {
 		this.taskContent = taskContent;
+	}
+
+	public Date getTaskDate() {
+		return taskDate;
+	}
+
+	public void setTaskDate(Date taskDate) {
+		this.taskDate = taskDate;
 	}
 
 }

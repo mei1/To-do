@@ -7,7 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.qimei.training.pojo.NewTask;
+import org.qimei.training.pojo.Task;
 import org.qimei.training.pojo.TaskGroup;
 
 import com.j256.ormlite.dao.Dao;
@@ -21,7 +21,7 @@ import com.j256.ormlite.table.TableUtils;
 public class ToDoDBManager {
 	
 	private static ToDoDBManager dbManager;
-	private static Dao<NewTask, Object> newTaskDao;
+	private static Dao<Task, Object> taskDao;
 	private static Dao<TaskGroup, Object> taskGroupDao;
 	private static ConnectionSource connectionSource;
 
@@ -56,17 +56,17 @@ public class ToDoDBManager {
 	}
 	
 	private void createDaoObjects() throws SQLException {
-		newTaskDao = DaoManager.createDao(connectionSource, NewTask.class);
+		taskDao = DaoManager.createDao(connectionSource, Task.class);
 		taskGroupDao = DaoManager.createDao(connectionSource, TaskGroup.class);
 	}
 
 	private void createTablesIfNotExist() throws SQLException {
-		TableUtils.createTableIfNotExists(connectionSource, NewTask.class);
+		TableUtils.createTableIfNotExists(connectionSource, Task.class);
 		TableUtils.createTableIfNotExists(connectionSource, TaskGroup.class);
 	}
 	
-	public Dao<NewTask, Object> getNewTaskDao() {
-		return newTaskDao;
+	public Dao<Task, Object> getTaskDao() {
+		return taskDao;
 	}
 
 	public Dao<TaskGroup, Object> getTaskGroupDao() {
