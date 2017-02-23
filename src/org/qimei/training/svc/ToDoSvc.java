@@ -39,4 +39,27 @@ public class ToDoSvc {
 		return ToDoDBHelper.getInstance().getAllTaskGroupFromDB();
 	}
 
+	@RequestMapping(value = "tasksbyid", method = RequestMethod.POST, produces = "application/json")
+	public List<Task> getAllTaskById(@RequestBody TaskGroup taskGroupObj) throws SQLException{
+		logger.info("Get all task request");
+		return ToDoDBHelper.getInstance().getAllTasksById(taskGroupObj.getTaskGroupId());
+	}
+	
+	@RequestMapping(value = "alltaskgroups", method = RequestMethod.POST, produces = "application/json")
+	public List<TaskGroup> getAllTaskGroupById(@RequestBody TaskGroup taskGroupObj) throws SQLException{
+		logger.info("Get all task group request");
+		return ToDoDBHelper.getInstance().getAllTaskGroupById(taskGroupObj.getTaskGroupId());
+	}
+	
+	@RequestMapping(value = "deletetask", method = RequestMethod.DELETE, produces = "application/json")
+	public int deleteTask(@RequestBody Task taskObj) throws SQLException {
+		logger.info("Delete task request");
+		return ToDoDBHelper.getInstance().deleteExistingTask(taskObj.getTaskGroup().getTaskGroupId());
+	}
+	
+	@RequestMapping(value = "deletetaskgroup", method = RequestMethod.DELETE, produces = "application/json")
+	public int deleteTaskGroup(@RequestBody TaskGroup taskGroupObj) throws SQLException {
+		logger.info("Delete task group request");
+		return ToDoDBHelper.getInstance().deleteExistingTaskGroup(taskGroupObj.getTaskGroupId());
+	}
 }
