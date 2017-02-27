@@ -11,6 +11,11 @@
 		<param-value>classpath:resources/log4j.properties</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>todo</param-value>
+	</context-param>
+	
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
