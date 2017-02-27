@@ -10,21 +10,23 @@ import org.qimei.training.pojo.TaskGroup;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class ToDoSvc {
 	
 	private static final Logger logger = Logger.getLogger(ToDoSvc.class);
 
 	@RequestMapping(value = "inserttaskdata", method = RequestMethod.POST, produces = "application/json")
-	public int insertIntoTask(@RequestBody Task taskObj) throws SQLException {
+	public int insertIntoTask(@RequestBody Task newTask) throws SQLException {
 		logger.info("Insert into task request");
-		return ToDoDBHelper.getInstance().insertIntoNewTask(taskObj);
+		return ToDoDBHelper.getInstance().insertIntoNewTask(newTask);
 	}
 	
 	@RequestMapping(value = "inserttaskgroupdata", method = RequestMethod.POST, produces = "application/json")
-	public int insertIntoTaskGroup(@RequestBody TaskGroup taskGroupObj) throws SQLException{
+	public int insertIntoTaskGroup(@RequestBody TaskGroup taskGroup) throws SQLException{
 		logger.info("Insert into task group request");
-		return ToDoDBHelper.getInstance().insertIntoTaskGroup(taskGroupObj);
+		return ToDoDBHelper.getInstance().insertIntoTaskGroup(taskGroup);
 	}
 	
 	@RequestMapping(value = "alltasks", method = RequestMethod.GET, produces = "application/json")
@@ -41,13 +43,13 @@ public class ToDoSvc {
 
 	@RequestMapping(value = "tasksbyid", method = RequestMethod.POST, produces = "application/json")
 	public List<Task> getAllTaskById(@RequestBody TaskGroup taskGroupObj) throws SQLException{
-		logger.info("Get all task request");
+		logger.info("Get all task request by id");
 		return ToDoDBHelper.getInstance().getAllTasksById(taskGroupObj.getTaskGroupId());
 	}
 	
-	@RequestMapping(value = "alltaskgroups", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "taskgroupbyid", method = RequestMethod.POST, produces = "application/json")
 	public List<TaskGroup> getAllTaskGroupById(@RequestBody TaskGroup taskGroupObj) throws SQLException{
-		logger.info("Get all task group request");
+		logger.info("Get all task group request by id");
 		return ToDoDBHelper.getInstance().getAllTaskGroupById(taskGroupObj.getTaskGroupId());
 	}
 	
